@@ -50,20 +50,20 @@ Encontram-se definidos dois perfis de usuários:
 Por padrão, a aplicação é inicializada com dois usuários no banco de dados (*admin* e *user*) ambos com a mesma senha cadastrada ("1234").
 
 ## *Usuários*
-**User**: Um usuário pode fazer o seu cadastro na aplicação, enviando uma requisição POST para a rota ***"/api/v2/usuarios"***. Deverão ser enviadas as seguintes informações em um objeto json:
+**User**: Um usuário pode fazer o seu cadastro na aplicação, enviando uma requisição POST para a rota ***"/api/v3/usuarios"***. Deverão ser enviadas as seguintes informações em um objeto json:
  - nome:  String
  - login: String
  - senha: String
  - email: String
 
-**Admin**: Apenas administradores podem cadastrar outros administradores. Para isso, deverá ser enviada uma requisição POST para a rota ***"/api/v2/administradores"***. As informações a serem enviadas são as mesmas listadas no item anterior.
+**Admin**: Apenas administradores podem cadastrar outros administradores. Para isso, deverá ser enviada uma requisição POST para a rota ***"/api/v3/administradores"***. As informações a serem enviadas são as mesmas listadas no item anterior.
 
-**Exclusão de usuários/administradores**: Apenas administradores podem realizar a exclusão de usuários ou de outros administradores. Para isso, deverá ser enviada uma requisição DELETE para a rota ***"/api/v2/usuarios"***, a requisição deverá conter em seu body o login do usuário/administrador a ser excluído.
+**Exclusão de usuários/administradores**: Apenas administradores podem realizar a exclusão de usuários ou de outros administradores. Para isso, deverá ser enviada uma requisição DELETE para a rota ***"/api/v3/usuarios"***, a requisição deverá conter em seu body o login do usuário/administrador a ser excluído.
 
 
 ## *Rotas*
 ### Login
-- POST      /api/seg/login             -> Obtem token de autenticação.
+- POST      /api/v3/seg/login          -> Obtem token de autenticação.
 
 ### Usuários
 - POST      /api/v3/usuarios           -> Inclui um novo usuário.
