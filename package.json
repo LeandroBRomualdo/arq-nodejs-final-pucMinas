@@ -2,7 +2,7 @@
   "name": "iec-asd04t1-trabalho-pratico-marco-assuncao",
   "description": "API RESTful para a realização das operações de CRUD (Create, Read, Update e Delete), desenvolvida para a disciplina Plataforma Node.js da *Especialização em Arquitetura de Software Distribuído* na PUC Minas, utilizando Node.js e Express.",
   "version": "1.0.0",
-  "homepage": "https://github.com/masassuncao/arq-nodejs-pucMinas/blob/main/README.md",
+  "homepage": "https://github.com/masassuncao/arq-nodejs-final-pucMinas/blob/main/README.md",
   "main": "server.js",
   "scripts": {
     "start": "./scripts/appStartUp.sh",

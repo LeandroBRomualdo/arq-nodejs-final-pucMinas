@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Grupo 6 - API de filmes</title>
+    </head>
+
+    <style>
+        header {
+            padding-bottom: 15pt;
+        }
+        header h1 {
+            text-align: center;
+        }
+        header h2 {
+            text-align: center;
+        }
+        body {
+            text-align: left;
+        }
+        div {
+            padding-top: 10pt;
+            padding-bottom: 20pt;
+
+        }
+        table {
+                border-collapse: collapse;
+                width: 80%;
+                margin: 20px auto;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+    </style>
+
+    <body>
+
+        <header>
+            <h1>PUC Minas</h1>
+            <h1>Especialização em Arquitetura de Software Distribuído</h1>
+            <h1>* Disciplina Plataforma Node.js *</h1>
+        </header>
+
+        <main>
+            <div >
+                <hr style="margin-bottom: 15pt;">
+                <h3>Trabalho Prático 03: API RESTful Completa com BD e Segurança</h3>
+                <p><b>Grupo 06</b> - <b>Alunos</b>: Edson Miguel, Leandro Braga e Marco Assunção</p>
+                <p><b>Turma</b>: IEC-ASD-O4-T1</p>
+                <hr style="margin-top: 15pt;">
+            </div>
+            <div>
+                <h2>Funcionalidades da API</h2>
+                <table>
+                    <tr>
+                        <th>Ação</th>
+                        <th>Operação (CRUD)</th>
+                        <th>Mapeamento da URL</th>
+                    </tr>
+                    <tr>
+                        <td>Incluir um filme</td>
+                        <td>CREATE</td>
+                        <td>POST .../filmes</td>
+                    </tr>
+                    <tr>
+                        <td>Obter a lista de filmes</td>
+                        <td>RETRIEVE</td>
+                        <td>GET .../filmes</td>
+                    </tr>
+                    <tr>
+                        <td>Obter um filme específico</td>
+                        <td>RETRIEVE</td>
+                        <td>GET .../filmes/:id</td>
+                    </tr>
+                    <tr>
+                        <td>Alterar um filme</td>
+                        <td>UPDATE</td>
+                        <td>PUT .../filmes/:id</td>
+                    </tr>
+                    <tr>
+                        <td>Excluir um filme</td>
+                        <td>DELETE</td>
+                        <td>DELETE .../filmes/:id</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <h2>Segurança</h2>
+                <p>
+                    A aplicação implementa autenticação e autorização por meio de JSON Web Token (JWT), de forma que para acesso aos recursos de qualquer rota, o usuário deverá estar autenticado no sistema.
+                </p>
+
+                <p>
+                    Encontram-se definidos dois perfis de usuários: <br>
+                    <b>* USER: </b> Trata-se do usuário do sistema, tendo acesso a listar todos os filmes disponíveis e buscar filmes por id. <br>
+                    <b>* ADMIN: </b> Trata-se do administrador do sistema que, além dos acessos concedidos ao usuário comum (listar/buscar filmes), pode também inserir, alterar, ou excluir filmes da base de dados.
+                </p>
+
+                <p>
+                    Por padrão, a aplicação é inicializada com dois usuários no banco de dados (admin e user) ambos com a mesma senha cadastrada ("1234").
+                </p>
+            </div>
+            <div>
+                <h2>Inclusão e exclusão de usuários</h2>
+                <p>
+                    <b>* User: </b> Um usuário pode fazer o seu cadastro na aplicação, enviando uma requisição POST para a rota "/api/v3/usuarios".
+                </p>
+
+                <p>
+                    <b>* Admin: </b> Apenas administradores podem cadastrar outros administradores. Para isso, deverá ser enviada uma requisição
+                    POST para a rota "/api/v3/administradores". As informações a serem enviadas são as mesmas necessárias ao cadastro de um usuário comum.
+                </p>
+
+                <p>
+                    <b>* Exclusão de qualquer usuário do sistema: </b> Apenas administradores podem realizar a exclusão de usuários ou de outros administradores. 
+                    Para isso, deverá ser enviada uma requisição DELETE para a rota "/api/v3/usuarios", a requisição deverá conter em seu body o login do usuário a ser excluído.
+                </p>
+            </div>
+            <div>
+                <h2>Rotas da aplicação</h2>
+                <table>
+                    <tr>
+                        <th>Rota</th>
+                        <th>Descrição</th>
+                    </tr>
+                    <tr>
+                        <td>POST .../api/v3/filmes</td>
+                        <td>Inclui um novo filme.</td>
+                    </tr>
+                    <tr>
+                        <td>GET .../api/v3/filmes</td>
+                        <td>Retorna uma lista com todos os filmes.</td>
+                    </tr>
+                    <tr>
+                        <td>GET .../api/v3/filmes/:id</td>
+                        <td>Retorna um filme específico por ID.</td>
+                    </tr>
+                    <tr>
+                        <td>PUT .../api/v3/filmes/:id</td>
+                        <td>Altera um filme existente.</td>
+                    </tr>
+                    <tr>
+                        <td>DELETE .../api/v3/filmes/:id</td>
+                        <td>Exclui um filme existente.</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>POST .../api/v3/usuarios</td>
+                        <td>Inclui um novo usuário.</td>
+                    </tr>
+                    <tr>
+                        <td>POST .../api/v3/administradores</td>
+                        <td>Inclui um novo administrador.</td>
+                    </tr>
+                    <tr>
+                        <td>DELETE .../api/v3/usuarios</td>
+                        <td>Exclui um usuário ou um administrador.</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>POST .../api/seg/login</td>
+                        <td>Obtem token de autenticação.</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <h2>Esquema do objeto json a ser enviado no body das requisições de POST e PUT para as rotas de filmes:</h2>
+                <table>
+                    <tr>
+                        <th>Campo</th>
+                        <th>Tipo</th>
+                        <th>Descrição</th>
+                        <th>Observações</th>
+                    </tr>
+                    <tr>
+                        <td>title</td>
+                        <td>string</td>
+                        <td>Título do filme.</td>
+                        <td>Campo obrigatório.</td>
+                    </tr>
+                    <tr>
+                        <td>year</td>
+                        <td>number</td>
+                        <td>Ano de lançamento do filme.</td>
+                        <td>Campo obrigatório.</td>
+                    </tr>
+                    <tr>
+                        <td>cast</td>
+                        <td>string</td>
+                        <td>Elenco do filme.</td>
+                        <td>Campo obrigatório.</td>
+                    </tr>
+                    <tr>
+                        <td>genre</td>
+                        <td>string</td>
+                        <td>Gênero do filme.</td>
+                        <td>Campo obrigatório.</td>
+                    </tr>
+                    <tr>
+                        <td>href</td>
+                        <td>string</td>
+                        <td>Outras referências para busca.</td>
+                        <td>Campo opcional.</td>
+                    </tr>
+                    <tr>
+                        <td>extract</td>
+                        <td>string</td>
+                        <td>Sinopse do filme.</td>
+                        <td>Campo opcional.</td>
+                    </tr>
+                    <tr>
+                        <td>thumbnail</td>
+                        <td>string</td>
+                        <td>Link para o poster do filme.</td>
+                        <td>Campo opcional.</td>
+                    </tr>
+                    <tr>
+                        <td>thumbnail_width</td>
+                        <td>number</td>
+                        <td>Largura do poster do filme.</td>
+                        <td>Campo opcional.</td>
+                    </tr>
+                    <tr>
+                        <td>thumbnail_height</td>
+                        <td>number</td>
+                        <td>Altura do poster do filme.</td>
+                        <td>Campo opcional.</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <b style="font-size: medium">Exemplo de objeto json para requisições:</b>
+                <div style="margin-top: 3pt; padding: 10pt; background-color: rgb(248, 238, 226);">
+                    {
+                        <div style="padding-left: 8pt; padding-top: 0; padding-bottom: 0; text-align: justify;">
+                            "title": "Airplane!",<br> 
+                            "year": 1980,<br>
+                            "cast": "Robert Hays",<br>
+                            "genre": "Comedy",<br>
+                            "href": "Airplane!",<br>
+                            "extract": "Airplane! is a 1980 American parody film written and directed by the brothers David and Jerry Zucker, and Jim Abrahams in their directorial debuts, and produced by Jon Davison. It stars Robert Hays and Julie Hagerty and features Leslie Nielsen, Robert Stack, Lloyd Bridges, Peter Graves, Kareem Abdul-Jabbar, and Lorna Patterson. It is a parody of the disaster film genre, particularly the 1957 Paramount film Zero Hour!, from which it borrows its plot, central characters, and some dialogue. It also draws many elements from Airport 1975 and other films in the Airport series. It is known for its use of surreal humor and fast-paced slapstick comedy, including visual and verbal puns, gags, running jokes, and obscure humor.",<br>
+                            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/2/21/Airplane%21_%281980_film%29.jpg",<br>
+                            "thumbnail_width": 258,<br>
+                            "thumbnail_height": 386
+                        </div>
+                    }
+                </div>
+            </div>
+            <div>
+                <h2>Esquema do objeto json a ser enviado no body das requisições de POST para as rotas de usuários/administradores:</h2>
+                <table>
+                    <tr>
+                        <th>Campo</th>
+                        <th>Tipo</th>
+                        <th>Descrição</th>
+                        <th>Observações</th>
+                    </tr>
+                    <tr>
+                        <td>nome</td>
+                        <td>String</td>
+                        <td>Nome do usuário / administrador.</td>
+                        <td>Campo obrigatório.</td>
+                    </tr>
+                    <tr>
+                        <td>login</td>
+                        <td>String</td>
+                        <td>Login para o novo usuário / administrador.</td>
+                        <td>Campo obrigatório. Este campo deve ser um identificador único no sistema.</td>
+                    </tr>
+                    <tr>
+                        <td>senha</td>
+                        <td>String</td>
+                        <td>Senha alfanumérica para o novo usuário / administrador.</td>
+                        <td>Campo obrigatório.</td>
+                    </tr>
+                    <tr>
+                        <td>email</td>
+                        <td>String</td>
+                        <td>E-mail do novo usuário / administrador.</td>
+                        <td>Campo obrigatório.</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <b style="font-size: medium">Exemplo de objeto json para requisições:</b>
+                <div style="margin-top: 3pt; padding: 10pt; background-color: rgb(248, 238, 226);">
+                    {
+                        <div style="padding-left: 8pt; padding-top: 0; padding-bottom: 0; text-align: justify;">
+                            "nome": "José da Silva",<br> 
+                            "login": "joseS",<br>
+                            "senha": "jose1234",<br>
+                            "email": "jose@e-mail.com.br",<br>
+                        </div>
+                    }
+                </div>
+            </div>
+        </main>
+
+    </body>
+
+</html>

@@ -18,6 +18,10 @@ rotasV3.use(
 rotasV3.use(express.json())
 rotasV3.use(express.urlencoded({extended: true}))
 
+rotasV3.get('/', function(req, res){
+    res.sendFile('index.html', { root: '.' })
+})
+
 // Rotas da filmes
 rotasV3.post('/filmes/', checkToken, isAdmin, controladoraFilmes.incluirFilme)
 rotasV3.get('/filmes/', checkToken, controladoraFilmes.obterTodosFilmes)
