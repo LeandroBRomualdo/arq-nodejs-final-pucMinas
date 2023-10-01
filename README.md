@@ -63,7 +63,7 @@ Por padrão, a aplicação é inicializada com dois usuários no banco de dados 
 
 ## *Rotas*
 ### Login
-- POST      /api/v3/seg/login          -> Obtem token de autenticação.
+- POST      /api/seg/login             -> Obtem token de autenticação.
 
 ### Usuários
 - POST      /api/v3/usuarios           -> Inclui um novo usuário.
