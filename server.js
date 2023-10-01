@@ -1,9 +1,14 @@
 // Importa o módulo do Express Framework
 const express = require('express')
+const cors = require('cors');
 const app = express()
 
 // Importa o módulo dotenv
 const env = require('dotenv').config()
+
+app.use(cors({
+    origin: '*'
+}));
 
 // Importa os módulos para tratamento das rotas
 const apiRotasV3 = require('./src/routes/rotasV3')
